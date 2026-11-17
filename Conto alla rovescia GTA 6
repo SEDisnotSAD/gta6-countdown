@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI Countdown by SED</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ min-height:100vh;
+ color:white;
+ font-family:Arial,sans-serif;
+ text-align:center;
+ background:
+ linear-gradient(180deg,rgba(12,8,29,.35),#100d24 85%),
+ url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1400&q=85") center/cover fixed;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+
+.container{width:100%;max-width:650px}
+
+.logo{
+ font-size:clamp(38px,10vw,72px);
+ font-weight:900;
+ color:#ffb7d5;
+ text-shadow:3px 3px #e83e9b,6px 6px #5239a4;
+}
+
+.subtitle{
+ letter-spacing:5px;
+ color:#f6b6d5;
+ margin:12px 0 30px;
+}
+
+.panel{
+ background:#100d24cc;
+ border:1px solid #ec70b5;
+ border-radius:20px;
+ padding:25px 12px;
+ box-shadow:0 0 30px #df45a455;
+}
+
+.timer{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+}
+
+.unit{
+ background:#25203b;
+ border-radius:12px;
+ padding:18px 4px;
+}
+
+.number{
+ font-size:clamp(27px,7vw,48px);
+ font-weight:bold;
+ color:#ffb7d5;
+}
+
+.label{
+ font-size:10px;
+ letter-spacing:2px;
+ margin-top:8px;
+ color:#d8c5ed;
+}
+
+.footer{
+ margin-top:25px;
+ color:#e8a7d1;
+ letter-spacing:2px;
+ font-size:13px;
+}
+
+.signature{
+ margin-top:22px;
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:7px;
+ color:#ff75c8;
+ text-shadow:
+ 0 0 8px #ff40b5,
+ 0 0 18px #a34dff,
+ 0 0 30px #a34dff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+ <div class="logo">GTA VI</div>
+
+ <div class="subtitle">
+ VICE CITY • THE COUNTDOWN
+ </div>
+
+ <div class="panel">
+
+  <h2>IL GRANDE GIORNO SI AVVICINA</h2>
+
+  <div class="timer">
+
+   <div class="unit">
+    <div class="number" id="days">--</div>
+    <div class="label">GIORNI</div>
+   </div>
+
+   <div class="unit">
+    <div class="number" id="hours">--</div>
+    <div class="label">ORE</div>
+   </div>
+
+   <div class="unit">
+    <div class="number" id="minutes">--</div>
+    <div class="label">MINUTI</div>
+   </div>
+
+   <div class="unit">
+    <div class="number" id="seconds">--</div>
+    <div class="label">SECONDI</div>
+   </div>
+
+  </div>
+
+  <div class="footer" id="status">
+   19 NOVEMBRE 2026
+  </div>
+
+ </div>
+
+ <div class="footer">
+ ROCKSTAR GAMES • GRAND THEFT AUTO VI
+ </div>
+
+ <div class="signature">
+ BY SED
+ </div>
+
+</div>
+
+<script>
+
+const target = new Date("2026-11-19T00:00:00+01:00").getTime();
+
+function update(){
+
+ const diff = target - Date.now();
+
+ if(diff <= 0){
+
+  ["days","hours","minutes","seconds"].forEach(id=>{
+   document.getElementById(id).textContent="00";
+  });
+
+  document.getElementById("status").textContent="GTA VI È ARRIVATO!";
+
+  return;
+ }
+
+ const d = Math.floor(diff / 86400000);
+ const h = Math.floor(diff % 86400000 / 3600000);
+ const m = Math.floor(diff % 3600000 / 60000);
+ const s = Math.floor(diff % 60000 / 1000);
+
+ document.getElementById("days").textContent=d;
+ document.getElementById("hours").textContent=String(h).padStart(2,"0");
+ document.getElementById("minutes").textContent=String(m).padStart(2,"0");
+ document.getElementById("seconds").textContent=String(s).padStart(2,"0");
+
+}
+
+update();
+setInterval(update,1000);
+
+</script>
+
+</body>
+</html>
